@@ -62,12 +62,12 @@ PyTorch és una biblioteca de codi obert per a l'aprenentatge automàtic i la co
 
 **PyTorch** és coneguda per la seva facilitat d'ús, flexibilitat i suport per a càlculs en GPU, permetent així desenvolupar models complexos de manera eficient.
 
-Per instal·lar **PyTorch**:
+Per instal·lar **PyTorch** a Windows:
 ```bash
 pip install torch torchvision torchaudio Pillow tqdm pandas numpy scikit-learn transformers
 ```
 
-O bé a macOS amb *brew*:
+O bé a macOS o Linux amb *brew*:
 ```bash
 python3 -m pip install torch torchvision torchaudio Pillow tqdm pandas numpy scikit-learn transformers --break-system-package
 ```
