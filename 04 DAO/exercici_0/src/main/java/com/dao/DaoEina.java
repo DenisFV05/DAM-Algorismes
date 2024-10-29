@@ -1,12 +1,12 @@
 package com.dao;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class DaoEina implements Dao<ObjEina> {
 
@@ -117,12 +117,39 @@ public class DaoEina implements Dao<ObjEina> {
         }
     }
 
+    
     public void setLlenguatgesDelete(int id, int idLlenguatge) {
         ObjEina eina = get(id);
         if (eina != null) {
             eina.getLlenguatges().remove(Integer.valueOf(idLlenguatge));
             update(id, eina);
         }
+    }
+
+    @Override
+    public void setAny(int id, int any) {
+        ObjEina eina = get(id);
+        if (eina != null) {
+            eina.setAny(any);
+            ArrayList<ObjEina> llista = getAll();
+            int pos = getPosition(id);
+            if (pos != -1) {
+            eina.setAny(any);
+            writeList(llista);
+        }}
+    }
+
+    @Override
+    public void setNom(int id, String nom) {
+        ObjEina eina = get(id);
+        if (eina != null) {
+            eina.setNom(nom);;
+            ArrayList<ObjEina> llista = getAll();
+            int pos = getPosition(id);
+            if (pos != -1) {
+            eina.setNom(nom);;
+            writeList(llista);
+        }}
     }
 }
 

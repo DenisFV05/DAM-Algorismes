@@ -8,7 +8,8 @@ public interface Dao<T> {
 
     T get(int id); // Equival a Read
     ArrayList<T> getAll();
-
+    void setNom(int id, String nom);
+    void setAny(int id, int any);
     void update(int id, T t);
 
     void delete(int id); 
