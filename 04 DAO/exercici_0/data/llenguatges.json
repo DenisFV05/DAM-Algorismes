@@ -1,37 +1,30 @@
 [
     {
+        "popularitat": 8,
         "id": 1,
         "nom": "Java",
         "any": 1995,
-        "dificultat": "mitja",
-        "popularitat": 8
+        "dificultat": "mitja"
     },
     {
+        "popularitat": 10,
         "id": 2,
         "nom": "Python",
         "any": 1991,
-        "dificultat": "facil",
-        "popularitat": 10
+        "dificultat": "facil"
     },
     {
+        "popularitat": 7,
         "id": 3,
         "nom": "C++",
         "any": 1985,
-        "dificultat": "dificil",
-        "popularitat": 7
+        "dificultat": "dificil"
     },
     {
+        "popularitat": 9,
         "id": 4,
         "nom": "JavaScript",
         "any": 1995,
-        "dificultat": "facil",
-        "popularitat": 9
-    },
-    {
-        "id": 5,
-        "nom": "Ruby",
-        "any": 1995,
-        "dificultat": "mitja",
-        "popularitat": 6
+        "dificultat": "facil"
     }
 ]
