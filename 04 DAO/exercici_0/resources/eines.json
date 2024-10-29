@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "nom": "IntelliJ IDEA",
+        "any": 2001,
+        "llenguatges": [1, 3]
+    },
+    {
+        "id": 2,
+        "nom": "PyCharm",
+        "any": 2010,
+        "llenguatges": [2]
+    },
+    {
+        "id": 3,
+        "nom": "Visual Studio Code",
+        "any": 2015,
+        "llenguatges": [1, 2, 3, 4, 5]
+    },
+    {
+        "id": 4,
+        "nom": "Eclipse",
+        "any": 2004,
+        "llenguatges": [1, 3]
+    },
+    {
+        "id": 5,
+        "nom": "Atom",
+        "any": 2014,
+        "llenguatges": [2, 4, 5]
+    }
+]
