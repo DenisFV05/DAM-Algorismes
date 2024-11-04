@@ -60,14 +60,16 @@ Per ententre millor com les capes ocultes d'una xarxa neural:
 
 [Tensorflow playground](https://playground.tensorflow.org/)
 
-<br/>
-<center><img src="./assets/tensorflow-playground.png" style="max-height: 400px" alt="">
-<br/></center>
-<br/>
-
 - Es poden entrenar fins a 4 tipus de datasets diferents
 - Es poden afegir i treure capes ocultes
 - Es pot canviar la funció d'activació
 
+És interessant per:
+
 - Mostra el pes que té cada neurona
 - Mostra la capacitat de detecció de les dades del dataset
+
+<br/>
+<center><img src="./assets/tensorflow-playground.png" style="max-height: 400px" alt="">
+<br/></center>
+<br/>
