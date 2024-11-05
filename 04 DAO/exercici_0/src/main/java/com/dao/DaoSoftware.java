@@ -1,12 +1,12 @@
 package com.dao;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class DaoSoftware implements Dao<ObjSoftware> {
 
@@ -123,6 +123,32 @@ public class DaoSoftware implements Dao<ObjSoftware> {
             software.getLlenguatges().remove(Integer.valueOf(idLlenguatge));
             update(id, software);
         }
+    }
+
+    @Override
+    public void setAny(int id, int any) {
+        ObjSoftware software = get(id);
+        if (software != null) {
+            software.setAny(any);
+            ArrayList<ObjSoftware> llista = getAll();
+            int pos = getPosition(id);
+            if (pos != -1) {
+            software.setAny(any);
+            writeList(llista);
+        }}
+    }
+
+    @Override
+    public void setNom(int id, String nom) {
+        ObjSoftware software = get(id);
+        if (software != null) {
+            software.setNom(nom);;
+            ArrayList<ObjSoftware> llista = getAll();
+            int pos = getPosition(id);
+            if (pos != -1) {
+            software.setNom(nom);;
+            writeList(llista);
+        }}
     }
 }
 

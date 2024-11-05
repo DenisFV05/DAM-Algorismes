@@ -2,13 +2,13 @@ package com.dao;
 
 
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class DaoLlenguatge implements Dao<ObjLlenguatge> {
 
@@ -105,22 +105,7 @@ public class DaoLlenguatge implements Dao<ObjLlenguatge> {
         llista.forEach(System.out::println);
     }
 
-    // Métodos específicos para DaoLlenguatge
-    public void setNom(int id, String nom) {
-        ObjLlenguatge llenguatge = get(id);
-        if (llenguatge != null) {
-            llenguatge.setNom(nom);
-            update(id, llenguatge);
-        }
-    }
-
-    public void setAny(int id, int any) {
-        ObjLlenguatge llenguatge = get(id);
-        if (llenguatge != null) {
-            llenguatge.setAny(any);
-            update(id, llenguatge);
-        }
-    }
+    
 
     public void setDificultat(int id, String dificultat) {
         ObjLlenguatge llenguatge = get(id);
@@ -137,6 +122,33 @@ public class DaoLlenguatge implements Dao<ObjLlenguatge> {
             update(id, llenguatge);
         }
     }
+
+    @Override
+    public void setAny(int id, int any) {
+        ObjLlenguatge llenguatge = get(id);
+        if (llenguatge != null) {
+            llenguatge.setAny(any);
+            ArrayList<ObjLlenguatge> llista = getAll();
+            int pos = getPosition(id);
+            if (pos != -1) {
+            llenguatge.setAny(any);
+            writeList(llista);
+        }}
+    }
+
+    @Override
+    public void setNom(int id, String nom) {
+        ObjLlenguatge llenguatge = get(id);
+        if (llenguatge != null) {
+            llenguatge.setNom(nom);;
+            ArrayList<ObjLlenguatge> llista = getAll();
+            int pos = getPosition(id);
+            if (pos != -1) {
+            llenguatge.setNom(nom);;
+            writeList(llista);
+        }}
+    }
+    
 }
 
 

@@ -4,10 +4,11 @@ import java.util.ArrayList;
 
 
 public class Main {
-   public static String basePath = System.getProperty("user.dir") + "\\resources";
-   public static String llenguatgesPath = basePath + "llenguatges.json";
-   public static String einesPath = basePath + "eines.json";
-   public static String softwarePath = basePath + "software.json";
+    public static String basePath = System.getProperty("user.dir") + "/";
+    public static String einesPath = basePath + "./data/eines.json";
+    public static String llenguatgesPath = basePath + "./data/llenguatges.json";
+    public static String softwarePath = basePath + "./data/software.json";
+
 
    public static void main(String[] args) {
 
