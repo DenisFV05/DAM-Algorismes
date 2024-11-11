@@ -1,6 +1,6 @@
 # Exercici 0
 
-Cal entrenar una xarxa neuronal que permeti classificar si un text en anglès o no, segons les categories: 
+Cal entrenar una xarxa neuronal que permeti classificar si un text és en anglès o no, segons les categories: 
 
 - eng, other
 

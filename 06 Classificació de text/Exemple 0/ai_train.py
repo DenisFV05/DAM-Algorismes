@@ -11,6 +11,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from transformers import BertTokenizer
+from tqdm import tqdm
 from ai_utils_text import ModelConfig, ModelDataset, ModelClassifier, EarlyStopping, getDevice
 
 CONFIG_FILE = "model_config.json"
@@ -22,8 +23,6 @@ def clearScreen():
         os.system('clear')
 
 clearScreen()
-
-from tqdm import tqdm
 
 def train_epoch(model, dataloader, optimizer, criterion, device):
     model.train()
