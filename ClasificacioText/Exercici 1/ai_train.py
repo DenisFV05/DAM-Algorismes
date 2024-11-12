@@ -13,7 +13,7 @@ from sklearn.preprocessing import LabelEncoder
 from transformers import BertTokenizer
 from ai_utils_text import ModelConfig, ModelDataset, ModelClassifier, EarlyStopping, getDevice
 
-CONFIG_FILE = "model_config.json"
+CONFIG_FILE = "ClasificacioText\\Exercici 1\\model_config.json"
 
 def clearScreen():
     if os.name == 'nt':     # Si estàs a Windows

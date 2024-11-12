@@ -12,7 +12,7 @@ from transformers import BertTokenizer
 from typing import List
 from ai_utils_text import ModelConfig, ModelDataset, ModelClassifier, getDevice
 
-CONFIG_FILE = "model_config.json"
+CONFIG_FILE = "ClasificacioText\\Exercici 1\\model_config.json"
 
 def clearScreen():
     if os.name == 'nt':     # Si estàs a Windows
@@ -97,7 +97,8 @@ def main():
             total += 1
             
             # Mostra el resultat de cada mostra
-            print(f"Text: {text[:50].ljust(50)}..., Prediction: {f'{confidence:.2%}'.rjust(7)} = {'"'+predicted_label+'"':6} ({'"'+true_label+'"':6} > {'correct' if is_correct else 'wrong'})")
+            print(f"Text: {text[:50].ljust(50)}..., Prediction: {f'{confidence:.2%}'.rjust(7)} = \"{predicted_label:6}\" (\"{true_label:6}\" > {'correct' if is_correct else 'wrong'})")
+
 
     # Càlcul de precisió i taxa d'error
     accuracy = correct / total
