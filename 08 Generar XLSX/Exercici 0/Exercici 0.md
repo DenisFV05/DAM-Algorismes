@@ -33,4 +33,4 @@ Els valors de les activitats són:
 - PR04 20%
 - EX01 50%
 
-**Important**: Els càlculs s'han de valors i estils s'han de fer automàticament a l'excel, NO al codi pyhton.
+**Important**: Els càlculs dels valors i estils s'han de fer automàticament a l'excel, NO al codi pyhton.
