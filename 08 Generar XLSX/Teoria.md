@@ -186,13 +186,13 @@ for fruit, price_per_kg, quantity in data:
 # Formats condicionals
 worksheet.conditional_format("B2:B6", {
     'type': 'cell',
-    'criteria': '>',
+    'criteria': '<',
     'value': 5,
     'format': workbook.add_format({'bg_color': '#FF0000', 'font_color': '#FFFFFF', 'align': 'center', 'valign': 'vcenter'})
 })
 worksheet.conditional_format("D2:D6", {
     'type': 'cell',
-    'criteria': '<',
+    'criteria': '>=',
     'value': 5,
     'format': workbook.add_format({'bg_color': '#DDEEDD', 'font_color': '#00AA00', 'align': 'right', 'valign': 'vcenter'})
 })
