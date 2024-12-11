@@ -80,7 +80,7 @@ c.setPageSize(A4)
 width, height = A4
 ```
 
-Cal tenir en compte que es pot dibuixar a qualsevol part de la pàgina, així **si no es vol dibuixar fora dels 'marges' és el programador qui ha de vigilar de no fer-ho**
+Cal tenir en compte que es pot dibuixar a qualsevol part de la pàgina, així **si no es vol dibuixar fora dels 'marges' és el programador qui ha de vigilar** de no fer-ho
 
 **Exemple 1**
 
