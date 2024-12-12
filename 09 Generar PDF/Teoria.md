@@ -42,7 +42,7 @@ Al canvas si poden anar 'pintant' els objectes a sobre dels antics, així si vol
 Les coordenades del canvas de *reportlab* són **"Bottom-Left"** això vol dir que la posició (0,0) està a baix a l'esquerra.
 
 <br/>
-<center><img src="./assets/context01.png" style="max-height: 400px" alt="">
+<center><img src="./assets/context01.jpg" style="max-height: 400px" alt="">
 <br/></center>
 <br/>
 <br/>
@@ -107,7 +107,8 @@ c.setPageSize(landscape(A4))
 width, height = landscape(A4)
 
 # Text de la pàgina
-c.drawString(margin_h, height - margin_v, "Primera pàgina - Horitzontal A4")
+pos_y = height - margin_v
+c.drawString(margin_h, pos_y, "Primera pàgina - Horitzontal A4")
 
 # Rectangle línia per marcar marges
 c.rect(margin_h, margin_v, width - 2 * margin_h, height - 2 * margin_v)
@@ -121,7 +122,8 @@ c.setPageSize(A4)
 width, height = A4
 
 # Text de la pàgina
-c.drawString(margin_h, height - margin_v, "Segona pàgina - Vertical A4")
+pos_y = height - margin_v
+c.drawString(margin_h, pos_y, "Segona pàgina - Vertical A4")
 
 # Rectangle per marcar marges
 c.rect(margin_h, margin_v, width - 2 * margin_h, height - 2 * margin_v)

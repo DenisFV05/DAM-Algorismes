@@ -20,7 +20,8 @@ c.setPageSize(landscape(A4))
 width, height = landscape(A4)
 
 # Text de la pàgina
-c.drawString(margin_h, height - margin_v, "Primera pàgina - Horitzontal A4")
+pos_y = height - margin_v
+c.drawString(margin_h, pos_y, "Primera pàgina - Horitzontal A4")
 
 # Rectangle línia per marcar marges
 c.rect(margin_h, margin_v, width - 2 * margin_h, height - 2 * margin_v)
@@ -34,7 +35,8 @@ c.setPageSize(A4)
 width, height = A4
 
 # Text de la pàgina
-c.drawString(margin_h, height - margin_v, "Segona pàgina - Vertical A4")
+pos_y = height - margin_v
+c.drawString(margin_h, pos_y, "Segona pàgina - Vertical A4")
 
 # Rectangle per marcar marges
 c.rect(margin_h, margin_v, width - 2 * margin_h, height - 2 * margin_v)
