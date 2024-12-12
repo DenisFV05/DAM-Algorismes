@@ -237,8 +237,106 @@ c.save()
 
 ## Estils de texts
 
+Els estils de text en *reportlab* es defineixen mitjançant objectes de tipus **ParagraphStyle**. Aquests estils permeten configurar atributs com:
 
-## Textos sobre camins (paths)
+- Font (`fontName`, `fontSize`, `leading`)
+- Colors (`textColor`, `backColor`)
+- Marges (`leftIndent`, `rightIndent`, `spaceBefore`, `spaceAfter`)
+- Alineació (`alignment`, amb valors com `TA_LEFT`, `TA_CENTER`, etc.)
+
+```python
+estilTitol = ParagraphStyle(
+    name="MainTitle",
+    fontName="Helvetica-Bold",
+    fontSize=24,
+    leading=30,
+    textColor=custom_colors['primary'],
+    alignment=TA_CENTER,
+    spaceAfter=20,
+)
+```
+
+A més s'accepta un petit conjunt d'elements HTML:
+
+```html
+# Formats bàsics
+<b> o <strong> - negreta
+<i> o <em> - cursiva
+<u> - subratllat
+<strike> - text tatxat
+<sub> - subíndex
+
+# Estructura
+<para> - paràgraf
+<br/> - salt de línia
+<span> - per aplicar estils a parts del text
+```
+
+### Exemple 3: Definir i aplicar estils de text
+
+```python
+#!/usr/bin/env python3
+
+from reportlab.lib.pagesizes import A4
+from reportlab.pdfgen import canvas
+from reportlab.platypus import Paragraph
+from reportlab.lib.styles import ParagraphStyle
+from reportlab.lib.enums import TA_LEFT, TA_CENTER
+from reportlab.lib import colors
+
+filename = "styles.pdf"
+
+# Definir estils personalitzats
+styles = {
+    "Title": ParagraphStyle(
+        name="Title",
+        fontName="Helvetica-Bold",
+        fontSize=18,
+        leading=22,
+        textColor=colors.darkblue,
+        alignment=TA_CENTER,
+        spaceAfter=12,
+    ),
+    "Body": ParagraphStyle(
+        name="Body",
+        fontName="Helvetica",
+        fontSize=12,
+        leading=15,
+        textColor=colors.black,
+        spaceBefore=6,
+        spaceAfter=6,
+    ),
+}
+
+# Crear el canvas
+c = canvas.Canvas(filename, pagesize=A4)
+page_width, page_height = A4
+
+# Funció per dibuixar paràgrafs
+
+def draw_paragraph(c, text, style, x, y, width):
+    p = Paragraph(text, style)
+    _, height = p.wrap(width, float('inf'))  # Ajustar amplada
+    p.drawOn(c, x, y - height)
+
+# Exemple d'ús dels estils
+draw_paragraph(c, "Document Title", styles["Title"], 50, page_height - 50, page_width - 100)
+
+draw_paragraph(
+    c,
+    ("This is an example of a body text with custom style. "
+     "Styles allow for easy customization of font, size, and other properties."),
+    styles["Body"],
+    50,
+    page_height - 100,
+    page_width - 100,
+)
+
+# Tancar i guardar
+c.save()
+```
+
+Així es pot modularitzar i reutilitzar els estils en tot el document.
 
 ## Imatges
 
