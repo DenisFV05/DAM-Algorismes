@@ -268,7 +268,7 @@ A més s'accepta un petit conjunt d'elements HTML:
 <br/> - salt de línia
 ```
 
-### Exemple 3: Definir i aplicar estils de text
+**Exemple 3**
 
 ```python
 #!/usr/bin/env python3
@@ -488,4 +488,320 @@ Així es pot modularitzar i reutilitzar els estils en tot el document.
 
 ## Imatges
 
+Es poden insertar imatges als documents amb:
+
+```python
+c.drawImage(image_path, x, y, width, height, None, True)
+```
+
+Els paràmetres són:
+
+- **image**: La ruta de la imatge
+- **x**: Coordenada X
+- **y**: Coordenada Y
+- **width**: Amplada de la imatge
+- **height**: Alçada de la imatge
+- **mask**: Una llista de 6 valors que defineixen un rang de colors per fer transparent una part de la imatge (exemple: [R1, G1, B1, R2, G2, B2]. Pot ser **None** si no es vol utilitzar.
+- **preserveAspectRatio**: Booleà que indica si s'ha de mantenir la proporció original de la imatge.
+- **anchor**: Especifica com s'ha d'alinear la imatge dins de l'àrea assignada. 
+```text
+    "c": Centre
+    "n": Nord (a dalt)
+    "s": Sud (a baix)
+    "e": Est (dreta)
+    "w": Oest (esquerra)
+    "se", "sw", "ne", "nw": Combina est i nord/sud, etc.
+```
+- **anchorAtXY**: Booleà que determina si les coordenades x i y representen el punt d'ancoratge.
+- **showBoundary**: Booleà que indica si s'ha de mostrar una línia que delimiti la imatge.
+- **extraReturn**: Paràmetre opcional per retornar informació addicional. Per defecte és **None**
+
+**Exemple 4**
+
+```python
+#!/usr/bin/env python3
+
+from reportlab.lib.pagesizes import A4
+from reportlab.pdfgen import canvas
+from reportlab.platypus import Paragraph
+from reportlab.lib.styles import ParagraphStyle
+from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT, TA_JUSTIFY
+
+filename = "with_image.pdf"
+
+def draw_paragraph(c, text, style, x, y, width):
+    p = Paragraph(text, style)
+    _, height = p.wrap(width, float('inf'))
+    p.drawOn(c, x, y - height)
+    return height
+
+c = canvas.Canvas(filename, pagesize=A4)
+
+# Afegir una imatge
+image_path = "dachshund.png" 
+x = 50 
+y = 550 
+width = 200 
+height = 250  
+c.drawImage(image_path, x, y, width, height, None, True)
+
+# Afegir comentari
+style = ParagraphStyle(
+    name="BodyLeft",
+    fontName="Helvetica",
+    fontSize=12,
+    leading=15,
+    textColor='#566573',
+    alignment=TA_LEFT,
+    spaceBefore=6,
+    spaceAfter=6,
+    firstLineIndent=0,
+)
+text = """
+El dachshund, també dit <b>teckel</b> o gos salsitxa, és una raça de gos. 
+<br/><br/>Té tres varietats: de pèl curt, de pèl dur i de pèl llarg.
+<br/><br/>Aquesta raça tenia com a funció atrapar rosegadors sota terra i dins dels caus, d'aquí la seva forma allargada i baixa, amb una cua llarga i dura que s'emprava en tant que tirador. 
+"""
+
+draw_paragraph(c, text, style, x + width + 10, y + height, width)
+
+# Guardar el PDF
+c.save()
+```
+
 ## Dibuix de formes
+
+**ReportLab**, ofereix diverses funcions per dibuixar formes geomètriques bàsiques com línies, rectangles, cercles i altres.
+
+### Tipus de poligons
+
+```python
+# Linia (x0, y0, x1, y1)
+c.line(100, 400, 300, 400)
+
+# Rectangle (x, y, ample, alt, ambContorn, ambEmplenat)
+c.rect(100, 600, 200, 100, stroke=1, fill=1)
+
+# Cercle (x, y, radi, ambContorn, ambEmplenat)
+c.circle(300, 500, 50, stroke=1, fill=1)
+
+# Ellipse (x, y, ample, alt, ambContorn, ambEmplenat)
+c.ellipse(100, 300, 250, 350, stroke=1, fill=1)
+```
+
+### Contorn (relleu o traç)
+
+```python
+# Ample del relleu
+c.setLineWidth(3)
+
+# Color del relleu amb format RGB
+c.setStrokeColorRGB(0.2, 0.5, 0.8)
+
+# Color del relleu amb format Hexadecimal
+c.setStrokeColorRGB("#5555AA")
+```
+
+### Emplenat
+
+```python
+# Color de l'emplenat amb format RGB
+c.setFillColorRGB(0.3, 0.6, 0.3)
+
+# Color de l'emplenat amb format Hexadecimal
+c.setStrokeColorRGB("#5555AA")
+```
+
+**Exemple 5**
+
+```python
+#!/usr/bin/env python3
+
+from reportlab.lib.pagesizes import A4
+from reportlab.pdfgen import canvas
+from reportlab.lib.colors import HexColor
+
+filename = "shapes.pdf"
+c = canvas.Canvas(filename, pagesize=A4)
+
+# Mides de la pàgina
+page_width, page_height = A4
+
+# Dibuixar una línia
+c.setLineWidth(4)
+c.setStrokeColor(HexColor("#55AAFF"))
+c.setStrokeColorRGB(0, 0, 0)
+c.line(100, 50, 300, 250)
+
+# Dibuixar un rectangle
+c.setStrokeColorRGB(0.2, 0.5, 0.8) 
+c.setFillColorRGB(0.8, 0.2, 0.2)
+c.setLineWidth(15)
+c.rect(100, 600, 200, 100, stroke=1, fill=1)
+
+# Dibuixar un cercle
+c.setLineWidth(5)
+c.setStrokeColor(HexColor("#FFAA55"))
+c.setFillColorRGB(0.3, 0.6, 0.3)
+c.circle(300, 500, 50, stroke=1, fill=1)
+
+# Dibuixar una el·lipse
+c.setFillColorRGB(0.4, 0.2, 0.6)
+c.ellipse(100, 300, 250, 350, stroke=0, fill=1)
+
+c.save()
+```
+
+## Dibuix de camins
+
+Es poden crear formes complexes a partir de **Paths**, que defineixen els punts on dibuixar el camí:
+
+```python
+# Començar un nou camí
+c.beginPath()
+
+# Moure el punter a una posició sense dibuixar
+c.moveTo(x, y)
+
+# Dibuixar una línia des de la posició actual fins a (x,y)
+c.lineTo(x, y)
+
+# Dibuixar una corba de Bézier
+# (x1,y1) i (x2,y2) són els punts de control
+# (x3,y3) és el punt final
+c.curveTo(x1, y1, x2, y2, x3, y3)
+
+# Opcional tancar el camí 
+# (connectant amb el punt inicial)
+c.closePath()
+
+# Finalitzar i dibuixar el camí
+c.drawPath(stroke=1, fill=1)
+```
+
+**Exemple 6**
+
+```python
+#!/usr/bin/env python3
+
+from reportlab.lib.pagesizes import A4
+from reportlab.pdfgen import canvas
+from reportlab.lib.colors import HexColor
+import math
+
+filename = "paths.pdf"
+
+c = canvas.Canvas(filename, pagesize=A4)
+page_width, page_height = A4
+margin = 50
+
+# Dibuixar una estrella utilitzant paths
+def draw_star(c, cx, cy, size, points=5, rotation=0):
+    # Calcular els punts de l'estrella
+    angle = (2 * math.pi) / points  # angle entre punts
+    outer_points = []
+    inner_points = []
+    
+    for i in range(points):
+        # Punts exteriors
+        x = cx + size * math.cos(i * angle - math.pi/2 + rotation)
+        y = cy + size * math.sin(i * angle - math.pi/2 + rotation)
+        outer_points.append((x, y))
+        
+        # Punts interiors (a meitat de distància)
+        x = cx + (size/2) * math.cos((i + 0.5) * angle - math.pi/2 + rotation)
+        y = cy + (size/2) * math.sin((i + 0.5) * angle - math.pi/2 + rotation)
+        inner_points.append((x, y))
+    
+    # Crear el camí
+    path = c.beginPath()
+    path.moveTo(outer_points[0][0], outer_points[0][1])
+    
+    # Dibuixar l'estrella alternant punts exteriors i interiors
+    for i in range(points):
+        path.lineTo(inner_points[i][0], inner_points[i][1])
+        path.lineTo(outer_points[(i+1)%points][0], outer_points[(i+1)%points][1])
+    
+    # Tancar i dibuixar el camí
+    path.close()
+    c.drawPath(path, stroke=1, fill=1)
+
+# Dibuixar una forma ondulada amb curveTo
+def draw_wave(c, x, y, width, height, waves=3):
+    path = c.beginPath()
+    path.moveTo(x, y)
+    
+    wave_width = width / waves
+    for i in range(waves):
+        # Punts de control per la corba
+        x1 = x + (i * wave_width) + (wave_width * 0.25)
+        y1 = y + height
+        x2 = x + (i * wave_width) + (wave_width * 0.75)
+        y2 = y + height
+        x3 = x + (i + 1) * wave_width
+        y3 = y
+        
+        path.curveTo(x1, y1, x2, y2, x3, y3)
+    
+    c.drawPath(path, stroke=1, fill=0)
+
+def draw_pentagon(c, cx, cy, size, rotation=0):
+    # Angles dels vèrtexs del pentàgon
+    angle1 = math.radians(rotation)
+    angle2 = angle1 + (2 * math.pi / 5)
+    angle3 = angle2 + (2 * math.pi / 5)
+    angle4 = angle3 + (2 * math.pi / 5)
+    angle5 = angle4 + (2 * math.pi / 5)
+    
+    # Coordenades dels cinc vèrtexs
+    x1, y1 = cx + size * math.cos(angle1), cy + size * math.sin(angle1)
+    x2, y2 = cx + size * math.cos(angle2), cy + size * math.sin(angle2)
+    x3, y3 = cx + size * math.cos(angle3), cy + size * math.sin(angle3)
+    x4, y4 = cx + size * math.cos(angle4), cy + size * math.sin(angle4)
+    x5, y5 = cx + size * math.cos(angle5), cy + size * math.sin(angle5)
+    
+    # Crear el camí
+    path = c.beginPath()
+    path.moveTo(x1, y1)
+    path.lineTo(x2, y2)
+    path.lineTo(x3, y3)
+    path.lineTo(x4, y4)
+    path.lineTo(x5, y5)
+    path.close()
+    
+    # Dibuixar el pentàgon
+    c.drawPath(path, stroke=1, fill=1)
+
+# Dibuixar dues estrelles
+c.setLineWidth(2)
+c.setStrokeColor(HexColor("#FF5555"))
+c.setFillColorRGB(0.9, 0.6, 0.1)
+draw_star(c, page_width/2, page_height-200, 100, points=5, rotation=0)
+c.setFillColorRGB(1.0, 1.0, 0.2, 0.5) # Semi transparent: alpha=0.5
+draw_star(c, page_width/2 + 55, page_height-200, 75, points=5, rotation=75)
+
+
+# Dibuixar ones
+c.setLineWidth(3)
+c.setStrokeColor(HexColor("#5555FF"))
+draw_wave(c, margin, page_height/2, page_width-2*margin, 50, waves=4)
+
+# Dibuixar un pentàgon al centre de la pàgina
+c.setStrokeColorRGB(0, 0, 0) 
+c.setFillColorRGB(0.6, 0.8, 0.2)
+page_width, page_height = A4
+draw_pentagon(c, 400, 150, 50, rotation=0)
+
+# Dibuixar una forma oberta
+c.setStrokeColorRGB(0, 0, 0) 
+path = c.beginPath()
+path.moveTo(100, 100) 
+path.lineTo(200, 200) 
+path.lineTo(250, 175)
+path.lineTo(200, 125)
+c.drawPath(path, stroke=1, fill=0)
+
+# Guardar el PDF
+c.save()
+```
+
