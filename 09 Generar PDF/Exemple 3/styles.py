@@ -80,6 +80,17 @@ styles = {
         spaceBefore=6,
         spaceAfter=6,
     ),
+    "BodyLeft": ParagraphStyle(
+        name="BodyLeft",
+        fontName="Helvetica",
+        fontSize=12,
+        leading=15,
+        textColor=custom_colors['neutral'],
+        alignment=TA_LEFT,
+        spaceBefore=6,
+        spaceAfter=6,
+        firstLineIndent=0,
+    ),
     "Quote": ParagraphStyle(
         name="Quote",
         fontName="Helvetica-Oblique",
@@ -179,11 +190,22 @@ list_items = [
     "Primer element de la llista amb <b>text en negreta</b>",
     "Segon element amb <i>text en cursiva</i>",
     "Tercer element amb <strike>text tatxat</strike>",
-    "Quart element amb <u>text subratllat</u>"
+    "Quart element amb <u>text subratllat</u>",
+    "Cinquè element amb un <sub>subíndex</sub>"
 ]
 
 # Dibuixar la llista
 current_y = draw_bullet_list(c, list_items, styles["ListStyle"], margin, current_y, width)
+
+texts = [
+    ("Exemple de <br/> salt de línia", "BodyLeft")
+]
+
+# Dibuixar cada text i actualitzar la posició vertical
+for text, style_name in texts:
+    height = draw_paragraph(c, text, styles[style_name], margin, current_y, width)
+    current_y -= (height + styles[style_name].spaceBefore + styles[style_name].spaceAfter)
+
 
 # Tancar i guardar
 c.save()
