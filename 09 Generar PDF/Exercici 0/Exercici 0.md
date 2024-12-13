@@ -14,11 +14,11 @@ Fes un script **python** que generi 5 arxius *.pdf* a partir de l'arxiu *clients
 
 Els documents han de:
 
-- Crear un .pdf per cada client amb les seves dades
-- Mostrar el calendari segons les dades de cada client
+- Crear un .pdf mida A4 per cada client amb les seves dades
 - Fer servir la plantilla indicada per cada alumne
 - El text "Departament ..." **ha d'enllaçar** cap a la web de l'institut
 - Afegir una imatge la firma de la companyia (inventada)
+- Mostrar el calendari segons les dades de cada client
 - **Tots** els calendaris han de tenir forma de calendari i una llegenda (encara que no surti a la plantilla)
 
 El text que s'ha de mostrar a la carta adaptat a cada client és el següent:
