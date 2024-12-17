@@ -13,7 +13,6 @@ page_width, page_height = A4
 # Dibuixar una línia
 c.setLineWidth(4)
 c.setStrokeColor(HexColor("#55AAFF"))
-c.setStrokeColorRGB(0, 0, 0)
 c.line(100, 50, 300, 250)
 
 # Dibuixar un rectangle

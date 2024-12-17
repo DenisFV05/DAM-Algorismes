@@ -645,7 +645,7 @@ c.setLineWidth(3)
 c.setStrokeColorRGB(0.2, 0.5, 0.8)
 
 # Color del relleu amb format Hexadecimal
-c.setStrokeColorRGB("#5555AA")
+c.setStrokeColor(HexColor("#5555AA"))
 ```
 
 ### Emplenat
@@ -655,7 +655,7 @@ c.setStrokeColorRGB("#5555AA")
 c.setFillColorRGB(0.3, 0.6, 0.3)
 
 # Color de l'emplenat amb format Hexadecimal
-c.setStrokeColorRGB("#5555AA")
+c.setFillColor(HexColor("#5555AA"))
 ```
 
 **Exemple 5**
@@ -676,7 +676,6 @@ page_width, page_height = A4
 # Dibuixar una línia
 c.setLineWidth(4)
 c.setStrokeColor(HexColor("#55AAFF"))
-c.setStrokeColorRGB(0, 0, 0)
 c.line(100, 50, 300, 250)
 
 # Dibuixar un rectangle
