@@ -1,0 +1,144 @@
+{
+  "clients": [
+    {
+      "companyia": "SuperPhone",
+      "nom": "Anna",
+      "cognom": "Garcia",
+      "mes_factura": "Gener",
+      "detall_cobraments": {
+        "quota_basica": 25.50,
+        "serveis_addicionals": [
+          {"nom": "TV Premium", "preu": 10.00},
+          {"nom": "Internet Extra", "preu": 15.00}
+        ],
+        "impostos": 10.50,
+        "total": 61.00
+      },
+      "calendari_pagaments": {
+        "Gener": "Regular",
+        "Febrer": "Bonificació 20%",
+        "Març": "Regular",
+        "Abril": "Exempt",
+        "Maig": "Regular",
+        "Juny": "Bonificació 10%",
+        "Juliol": "Regular",
+        "Agost": "Exempt",
+        "Setembre": "Bonificació 15%",
+        "Octubre": "Regular",
+        "Novembre": "Bonificació 5%",
+        "Desembre": "Regular"
+      }
+    },
+    {
+      "companyia": "CallMeNow",
+      "nom": "Joan",
+      "cognom": "Martínez",
+      "mes_factura": "Febrer",
+      "detall_cobraments": {
+        "quota_basica": 30.00,
+        "serveis_addicionals": [
+          {"nom": "Telefonia Mòbil", "preu": 20.00}
+        ],
+        "impostos": 9.00,
+        "total": 59.00
+      },
+      "calendari_pagaments": {
+        "Gener": "Bonificació 10%",
+        "Febrer": "Regular",
+        "Març": "Regular",
+        "Abril": "Exempt",
+        "Maig": "Regular",
+        "Juny": "Bonificació 25%",
+        "Juliol": "Regular",
+        "Agost": "Exempt",
+        "Setembre": "Regular",
+        "Octubre": "Bonificació 5%",
+        "Novembre": "Regular",
+        "Desembre": "Bonificació 15%"
+      }
+    },
+    {
+      "companyia": "MonoPhonica",
+      "nom": "Maria",
+      "cognom": "Lopez",
+      "mes_factura": "Març",
+      "detall_cobraments": {
+        "quota_basica": 20.00,
+        "serveis_addicionals": [],
+        "impostos": 4.20,
+        "total": 24.20
+      },
+      "calendari_pagaments": {
+        "Gener": "Regular",
+        "Febrer": "Regular",
+        "Març": "Regular",
+        "Abril": "Bonificació 15%",
+        "Maig": "Regular",
+        "Juny": "Exempt",
+        "Juliol": "Bonificació 10%",
+        "Agost": "Regular",
+        "Setembre": "Regular",
+        "Octubre": "Regular",
+        "Novembre": "Bonificació 20%",
+        "Desembre": "Regular"
+      }
+    },
+    {
+      "companyia": "NewLines",
+      "nom": "Pere",
+      "cognom": "Fernandez",
+      "mes_factura": "Abril",
+      "detall_cobraments": {
+        "quota_basica": 40.00,
+        "serveis_addicionals": [
+          {"nom": "TV Premium", "preu": 10.00},
+          {"nom": "Ràdio Digital", "preu": 5.00}
+        ],
+        "impostos": 10.50,
+        "total": 65.50
+      },
+      "calendari_pagaments": {
+        "Gener": "Exempt",
+        "Febrer": "Regular",
+        "Març": "Bonificació 30%",
+        "Abril": "Regular",
+        "Maig": "Bonificació 5%",
+        "Juny": "Regular",
+        "Juliol": "Regular",
+        "Agost": "Bonificació 10%",
+        "Setembre": "Regular",
+        "Octubre": "Exempt",
+        "Novembre": "Regular",
+        "Desembre": "Bonificació 25%"
+      }
+    },
+    {
+      "companyia": "AcostaVeu",
+      "nom": "Marta",
+      "cognom": "Sanchez",
+      "mes_factura": "Maig",
+      "detall_cobraments": {
+        "quota_basica": 35.00,
+        "serveis_addicionals": [
+          {"nom": "Internet Extra", "preu": 20.00}
+        ],
+        "impostos": 12.00,
+        "total": 67.00
+      },
+      "calendari_pagaments": {
+        "Gener": "Regular",
+        "Febrer": "Bonificació 15%",
+        "Març": "Exempt",
+        "Abril": "Regular",
+        "Maig": "Regular",
+        "Juny": "Bonificació 20%",
+        "Juliol": "Exempt",
+        "Agost": "Regular",
+        "Setembre": "Bonificació 5%",
+        "Octubre": "Regular",
+        "Novembre": "Regular",
+        "Desembre": "Bonificació 10%"
+      }
+    }
+  ]
+}

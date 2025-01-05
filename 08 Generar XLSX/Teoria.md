@@ -10,7 +10,7 @@
 
 # Generar XLSX
 
-A l'empresa, és habitual que s'hagin de generar arxius **Excel .XLSX** a partir de dades de manera automàtica. 
+A l'empresa, és habitual que s'hagin de generar arxius **Excel .xlsx** a partir de dades de manera automàtica. 
 
 Els llenguatges de programació solen tenir llibreries que ho fan possible. A Python hi ha *xlsxwriter*:
 
