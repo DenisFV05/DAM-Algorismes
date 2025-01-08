@@ -1,85 +1,82 @@
 import json
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
-from reportlab.lib import colors
-from reportlab.lib.enums import TA_CENTER, TA_LEFT
-from reportlab.platypus import Paragraph, Table, TableStyle
-from reportlab.lib.styles import ParagraphStyle
-from reportlab.pdfbase.pdfmetrics import stringWidth
+from reportlab.lib.colors import HexColor
 
 def load_clients(json_path):
     with open(json_path, 'r', encoding='utf-8') as file:
         return json.load(file)
 
-def generate_pdf(client, template_path, output_path):
-    """Genera un PDF personalizado para un cliente."""
+def generate_pdf(client, output_path):
+    """Genera un PDF personalizado basado en los datos del cliente."""
     c = canvas.Canvas(output_path, pagesize=A4)
     width, height = A4
 
-    # Título principal
-    style_title = ParagraphStyle(
-        name="Title",
-        fontName="Helvetica-Bold",
-        fontSize=16,
-        alignment=TA_CENTER,
-        spaceAfter=12
+    # Nombre de la compañía en grande y azul
+    c.setFont("Helvetica-Bold", 40)
+    c.setFillColor(HexColor("#00008B"))
+    c.drawString(50, height - 50, client['companyia'])
+
+    # Texto principal
+    c.setFont("Helvetica", 12)
+    c.setFillColor(HexColor("#000000"))
+    serveis_addicionals = ', '.join(f"{s['nom']} ({s['preu']} €)" for s in client['detall_cobraments']['serveis_addicionals'])
+    text = (
+        f"Estimad@ {client['nom']} {client['cognom']},\n\n"
+        f"Ens dirigim a vostè per presentar-li el detall de la seva factura corresponent al mes de {client['mes_factura']}:\n\n"
     )
-    title = f"FACTURA - {client['mes_factura']}"
-    title_p = Paragraph(title, style_title)
-    title_p.wrapOn(c, width - 100, height)
-    title_p.drawOn(c, 50, height - 50)
+    text_x = 50
+    text_y = height - 120
+    for line in text.split("\n"):
+        c.drawString(text_x, text_y, line)
+        text_y -= 15
 
-    # Texto principal con márgenes
-    text = f"""
-    Estimad@ {client['nom']} {client['cognom']},
+    # Detall dels Cobraments
+    c.setFont("Helvetica-Bold", 14)
+    c.drawString(text_x, text_y, "Detall dels Cobraments:")
+    text_y -= 20
 
-    Ens dirigim a vostè per presentar-li el detall de la seva factura corresponent al mes de {client['mes_factura']}:
+    c.setFont("Helvetica", 12)
+    c.drawString(text_x, text_y, f"- Quota bàsica mensual: {client['detall_cobraments']['quota_basica']} €")
+    text_y -= 15
+    c.drawString(text_x, text_y, f"- Serveis addicionals: {serveis_addicionals}")
+    text_y -= 15
+    c.drawString(text_x, text_y, f"- Impostos aplicats (IVA): {client['detall_cobraments']['impostos']} €")
+    text_y -= 20
 
-    Detall dels Cobraments:
-    - Quota bàsica mensual: {client['detall_cobraments']['quota_basica']} €
-    - Serveis addicionals: {', '.join(f"{s['nom']} ({s['preu']} €)" for s in client['detall_cobraments']['serveis_addicionals'])}
-    - Impostos aplicats (IVA): {client['detall_cobraments']['impostos']} €
+    c.setFont("Helvetica-Bold", 12)
+    c.drawString(text_x, text_y, f"Total a pagar: {client['detall_cobraments']['total']} €")
+    text_y -= 30
 
-    Total a pagar: {client['detall_cobraments']['total']} €
-
-    Gràcies per confiar en nosaltres.
-    """
-    style_body = ParagraphStyle(
-        name="Body",
-        fontName="Helvetica",
-        fontSize=12,
-        leading=14,
-        spaceBefore=10,
-        spaceAfter=10
+    # Mensaje adicional
+    c.setFont("Helvetica", 12)
+    additional_text = (
+        "Recordi que pot consultar els detalls de les seves factures i gestionar els seus pagaments\n"
+        "a través de l'àrea de clients al nostre lloc web o contactar amb el nostre servei\n"
+        "d'atenció al client.\n\n"
+        "Gràcies per confiar en nosaltres."
     )
-    body_p = Paragraph(text, style_body)
-    body_p.wrapOn(c, width - 100, height - 150)
-    body_p.drawOn(c, 50, height - 200)
+    for line in additional_text.split("\n"):
+        c.drawString(text_x, text_y, line)
+        text_y -= 15
 
     # Firma ficticia
-    c.drawString(50, 100, "[Firma de la companyia]")
+    text_y -= 20
+    c.setFont("Helvetica-Oblique", 10)
+    c.drawString(text_x, text_y, "[Firma de la Companyia]")
+    text_y -= 15
+    c.drawString(text_x, text_y, "Atentament, Departament d'Atenció al Client")
 
-    # Calendario como tabla
-    calendar_data = [["Mes", "Estat del Pagament"]] + [[mes, status] for mes, status in client['calendari_pagaments'].items()]
-    table = Table(calendar_data, colWidths=[150, 300])
-    table.setStyle(TableStyle([
-        ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
-        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
-        ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
-        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-        ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
-        ('GRID', (0, 0), (-1, -1), 1, colors.black),
-    ]))
-    table.wrapOn(c, width - 100, height - 400)
-    table.drawOn(c, 50, 200)
+    # Calendario
+    text_y -= 30
+    c.setFont("Helvetica-Bold", 14)
+    c.drawString(text_x, text_y, "Calendari de pagaments anual:")
+    text_y -= 20
 
-    # Enlace al sitio
-    website = "http://www.ieti.edu"
-    link_text = "Departament d'Atenció al Client"
-    link_width = stringWidth(link_text, "Helvetica", 12)
-    c.drawString(50, 50, link_text)
-    c.linkURL(website, (50, 45, 50 + link_width, 60), relative=0)
+    c.setFont("Helvetica", 10)
+    for mes, status in client['calendari_pagaments'].items():
+        c.drawString(text_x, text_y, f"{mes}: {status}")
+        text_y -= 12
 
     c.save()
 
@@ -89,5 +86,5 @@ data = load_clients('clients.json')
 # Generar PDFs para todos los clientes
 for i, client in enumerate(data['clients']):
     output_file = f"client_{i + 1}.pdf"
-    generate_pdf(client, "plantilla00.pdf", output_file)
+    generate_pdf(client, output_file)
     print(f"PDF generado: {output_file}")
