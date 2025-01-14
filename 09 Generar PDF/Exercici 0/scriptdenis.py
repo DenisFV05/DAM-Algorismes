@@ -13,10 +13,15 @@ def generate_pdf(client, output_path):
     c = canvas.Canvas(output_path, pagesize=A4)
     width, height = A4
 
-    # Nombre de la compañía en grande y azul
+    # Línea verde en la parte superior y más gruesa
+    c.setStrokeColor(HexColor("#40E0D0"))  # Establece el color turquesa claro
+    c.setLineWidth(6)  # Aumenta el grosor de la línea (6 puntos)
+    c.line(50, height - 20, width - 50, height - 20)  # Dibuja la línea en la parte superior de la página
+
+    # Nombre de la compañía en grande y azul (moviéndolo un poquito más abajo)
     c.setFont("Helvetica-Bold", 40)
     c.setFillColor(HexColor("#00008B"))
-    c.drawString(50, height - 50, client['companyia'])
+    c.drawString(50, height - 60, client['companyia'])
 
     # Texto principal
     c.setFont("Helvetica", 12)
@@ -68,18 +73,67 @@ def generate_pdf(client, output_path):
     text_y -= 15
     c.drawString(text_x, text_y, "Atentament, Departament d'Atenció al Client")
 
-    # Calendario
-    text_y -= 30
-    c.setFont("Helvetica-Bold", 14)
-    c.drawString(text_x, text_y, "Calendari de pagaments anual:")
+    # **Segunda página para el calendario**
+    c.showPage()  # Cambia a la segunda página
+
+    # Título de la sección del calendario
+    c.setFont("Helvetica-Bold", 16)
+    c.setFillColor(HexColor("#00008B"))
+    c.drawString(50, height - 50, "Calendari de Pagaments Anual:")
+
+    # Leyenda del calendario
+    c.setFont("Helvetica", 12)
+    text_y = height - 80  # Comienza debajo del título
+
+    # Leyenda: Definimos lo que significa cada color
+    c.setFillColor(HexColor("#000000"))
+    c.drawString(50, text_y, "Llegenda del Calendari:")
     text_y -= 20
 
-    c.setFont("Helvetica", 10)
-    for mes, status in client['calendari_pagaments'].items():
-        c.drawString(text_x, text_y, f"{mes}: {status}")
-        text_y -= 12
+    # Explicamos el significado de cada color
+    c.setFillColor(HexColor("#000000"))  # Negro para el texto
+    c.drawString(50, text_y, "Pagament regular:       ")
+    c.setFillColor(HexColor("#00008B"))  # Azul
+    c.drawString(250, text_y, "Bonificació del X%:     ")
+    c.setFillColor(HexColor("#40E0D0"))  # Verde (turquesa claro)
+    c.drawString(450, text_y, "Exempt de pagament:     ")
+    text_y -= 20
 
+    # Dibujamos un cuadro de color para que sea más claro
+    c.setFillColor(HexColor("#000000"))  # Negro
+    c.rect(150, text_y, 10, 10, fill=1)  # Rectángulo negro
+    c.setFillColor(HexColor("#00008B"))  # Azul
+    c.rect(350, text_y, 10, 10, fill=1)  # Rectángulo azul
+    c.setFillColor(HexColor("#40E0D0"))  # Verde
+    c.rect(550, text_y, 10, 10, fill=1)  # Rectángulo verde
+    text_y -= 30
+
+    # Establecer colores para los meses
+    colores_mes = {
+        "Pagament regular": "#000000",  # Negro
+        "Bonificació del X%": "#00008B",  # Azul
+        "Exempt de pagament": "#40E0D0",  # Verde
+    }
+
+    c.setFont("Helvetica", 12)
+    # Dibujar los meses con su tipo de pago y color
+    for i, (mes, status) in enumerate(client['calendari_pagaments'].items()):
+        # Determinamos el color según el tipo de pago
+        if "regular" in status.lower():
+            color = "#000000"  # Negro
+        elif "bonificació" in status.lower():
+            color = "#00008B"  # Azul
+        else:
+            color = "#40E0D0"  # Verde
+
+        c.setFillColor(HexColor(color))  # Establecemos el color correspondiente
+        c.drawString(50, text_y, f"{mes}: {status}")
+        text_y -= 20  # Espacio entre cada mes
+
+    # Guardar el PDF
     c.save()
+
+
 
 # Cargar datos desde el archivo clients.json
 data = load_clients('09 Generar PDF/Exercici 0/clients.json')

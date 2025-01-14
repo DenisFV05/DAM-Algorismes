@@ -44,7 +44,7 @@ def aplicar_estils_condicionals(full):
     })
 
 # Leer datos del JSON
-with open('notes.json') as f:
+with open('08 Excel/EXCEL/notes.json') as f:
     data = json.load(f)
 
 # Escribir encabezados y porcentajes en ambas hojas
