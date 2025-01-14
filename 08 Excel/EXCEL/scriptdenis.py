@@ -23,20 +23,20 @@ red_background = workbook.add_format({'bg_color': '#FF0000', 'font_color': 'blac
 percent_format = workbook.add_format({'num_format': '0%'})
 
 # Función para aplicar estilos condicionales
-def aplicar_estils_condicionals(full, total_rows):
-    full.conditional_format(f"B3:F{total_rows}", {  # Notas individuales en rojo si son < 5
+def aplicar_estils_condicionals(full):
+    full.conditional_format("B3:F1000", {  # Notas individuales en rojo si son < 5
         'type': 'cell',
         'criteria': '<',
         'value': 5,
         'format': red_text
     })
-    full.conditional_format(f"I3:I{total_rows}", {  # Nota final: rojo < 5, verde >= 7
+    full.conditional_format("I3:I1000", {  # Nota final: rojo < 5
         'type': 'cell',
         'criteria': '<',
         'value': 5,
         'format': red_background
     })
-    full.conditional_format(f"I3:I{total_rows}", {
+    full.conditional_format("I3:I1000", {  # Nota final: verde >= 7
         'type': 'cell',
         'criteria': '>=',
         'value': 7,
@@ -78,10 +78,8 @@ for element in data:
     worksheet1.write_formula(fila, 8, f"'Full 0'!I{fila + 1}")  # Nota Final
     fila += 1
 
-# Aplicar estilos condicionales
-total_rows = len(data) + 2  # Incluye títulos y porcentajes
-aplicar_estils_condicionals(worksheet, total_rows)
-aplicar_estils_condicionals(worksheet1, total_rows)
+aplicar_estils_condicionals(worksheet)
+aplicar_estils_condicionals(worksheet1)
 
 # Guardar el archivo
 workbook.close()
