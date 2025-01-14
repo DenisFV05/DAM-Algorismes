@@ -1,7 +1,8 @@
-import json
+from reportlab.lib.colors import HexColor
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
-from reportlab.lib.colors import HexColor
+import json
+
 
 def load_clients(json_path):
     with open(json_path, 'r', encoding='utf-8') as file:
@@ -81,7 +82,7 @@ def generate_pdf(client, output_path):
     c.save()
 
 # Cargar datos desde el archivo clients.json
-data = load_clients('clients.json')
+data = load_clients('09 Generar PDF/Exercici 0/clients.json')
 
 # Generar PDFs para todos los clientes
 for i, client in enumerate(data['clients']):
